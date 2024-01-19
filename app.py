@@ -1,10 +1,9 @@
-import os
 import streamlit as st
 from components import st_backend
 
 st.set_page_config(page_title="Word Power AI", layout="centered")
 
-K = st_backend.Backend(os.getcwd())
+K = st_backend.Backend()
 
 header = st.container()
 body = st.container()

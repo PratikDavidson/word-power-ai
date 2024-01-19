@@ -6,9 +6,9 @@ from components.model import Model
 
 model = Model()
 
-def default_parameters(root_dir):
-    st.session_state['image'] = Image.open(os.path.join(root_dir, "assests/placeholder.png")).resize((1024, 480))
-    st.session_state['audio'] = os.path.join(root_dir, "assests/silent_audio.mp3")
+def default_parameters():
+    st.session_state['image'] = Image.open("./assests/placeholder.png").resize((1024, 480))
+    st.session_state['audio'] = "./assests/silent_audio.mp3"
     st.session_state['story'] = ''
     st.session_state['story_blanks'] = ''
     st.session_state['answer'] = []
@@ -22,11 +22,10 @@ def text_process(text):
     answer_sorted = sorted(answer_list)
     return story_blanks, answer_list, answer_sorted
 
-class Backend():
-    def __init__(self, dir):
-        self.root_dir = dir
+class Backend:
+    def __init__(self):
         if 'image' not in st.session_state and 'audio' not in st.session_state and 'story' not in st.session_state and 'answer' not in st.session_state and 'story_blanks' not in st.session_state and 'answer_sorted' not in st.session_state:
-            default_parameters(self.root_dir)
+            default_parameters()
 
     @staticmethod
     def execute_workflow(pat, prompt):
@@ -47,6 +46,7 @@ class Backend():
                 st.toast('Correct Answer!', icon="✅")
             else:
                 st.toast('Wrong Answer!', icon="❌")
-    
-    def reset_to_default(self):
-        default_parameters(self.root_dir)
+
+    @staticmethod
+    def reset_to_default():
+        default_parameters()
