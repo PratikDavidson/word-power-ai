@@ -9,9 +9,10 @@ header = st.container()
 body = st.container()
 
 with st.sidebar:
-    pat = st.text_input('Enter Personal Access Token:', type='password')
+    pat = st.text_input('Enter Personal Access Token(Clarifai):', type="password")
     prompt = st.text_input('Enter a topic:')
     st.button('Generate Story', on_click = K.execute_workflow, args=(pat,prompt))
+    st.info('Get Personal Access Token from the Clarifai portal.', icon="ℹ️")
 
 with header:
     st.markdown("<h1 style='text-align: center;'>Word Power AI</h1>", unsafe_allow_html=True)
@@ -22,12 +23,12 @@ with body:
     st.audio(st.session_state['audio'], format="audio/mp3")
     st.subheader('', divider='gray')
     st.subheader('Story:')
-    st.write(st.session_state['story_blanks'])
-    options = st.multiselect('Select answers in order of blanks:', st.session_state['answer_sorted'])
+    st.write(st.session_state['story'] if st.session_state['story_state'] else st.session_state['story_blanks'])
+    options = st.multiselect('Select answers in order of blanks:', st.session_state['answer_sorted'], key="multiselect")
     st.write('You selected:', dict(enumerate(options,start=1)))
     submit, reset, *_ = st.columns(7)
     with submit:
         st.button('Submit', on_click = K.match_answer, args=(options, st.session_state['answer']))
     with reset:
-        st.button('Reset', on_click = K.reset_to_default)
+        st.button('Reset', on_click = K.reset_story)
 
