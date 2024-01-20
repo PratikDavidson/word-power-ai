@@ -5,7 +5,7 @@ import streamlit as st
 from components.model import Model
 from components import process
 
-PLACEHOLDER_IMG_URL = "https://raw.githubusercontent.com/PratikDavidson/word-power-ai/main/assests/placeholder.PNG"
+PLACEHOLDER_IMG_URL = "https://raw.githubusercontent.com/PratikDavidson/word-power-ai/main/assests/placeholder.jpg"
 PLACEHOLDER_AUDIO_URL = "https://github.com/PratikDavidson/word-power-ai/blob/main/assests/silent_audio.mp3"
 
 model = Model()
